@@ -1,22 +1,25 @@
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
-import { AuthProvider } from './context/AuthContext';
-import RegisterForm from './pages/auth/RegisterForm';
-import ProfilAvocatForm from './pages/auth/ProfilAvocatForm';
-import Dashboard from './pages/auth/Dashboard';
+import React from 'react';
+import {   Routes, Route } from 'react-router-dom';
+import Register from './comps/Sighup';
+import VerifyEmail from './comps/Verify';
+import CompleteSignup from './comps/CompleteSignup';
+import Continue from './comps/Continue';
+import Login from './comps/Login';
 
-function App() {
-    return (
-        <BrowserRouter>
-            <AuthProvider>
-                <Routes>
-                    <Route path="/"         element={<Navigate to="/register" />} />
-                    <Route path="/register" element={<RegisterForm />} />
-                    <Route path="/profil"   element={<ProfilAvocatForm />} />
-                    <Route path="/dashboard" element={<Dashboard />} />
-                </Routes>
-            </AuthProvider>
-        </BrowserRouter>
-    );
+export default function App() {
+  return (
+    
+      <Routes>
+        <Route path="/register" element={<Register />} />
+                <Route path="/cc" element={<Continue />} />
+
+        <Route path="/verify-email" element={<VerifyEmail />} />
+        <Route path='/login' element={ <Login/>} />
+            <Route
+          path="/avocatcomplete-signup"
+          element={<CompleteSignup />}
+        />
+      </Routes>
+
+  );
 }
-
-export default App;
