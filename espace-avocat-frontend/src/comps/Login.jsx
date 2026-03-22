@@ -1,44 +1,43 @@
 import { useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 export default function Login() {
+  const navigate = useNavigate();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [user, setUser] = useState(null);
   const [message, setMessage] = useState("");
 
-  const handleLogin = async (e) => {
-    e.preventDefault();
+const handleLogin = async (e) => {
+  e.preventDefault();
 
-    try {
-
-      const res = await axios.post(
-        "http://127.0.0.1:8000/api/login",
-        {
-          email: email,
-          password: password
-        }
-      );
-
-      const data = res.data;
-
-      setMessage(data.message);
-      setUser(data.user);
-
-      // save token
-      localStorage.setItem("token", data.token);
-
-    } catch (error) {
-
-      if (error.response) {
-        setMessage(error.response.data.message);
-      } else {
-        setMessage("Server error. Try again.");
+  try {
+    const res = await axios.post(
+      "http://127.0.0.1:8000/api/login",
+      {
+        email: email,
+        password: password
       }
+    );
 
+    const data = res.data;
+
+    localStorage.setItem("token", data.token);
+
+    if (data.user.role === "avocat") {
+      navigate("/AvocatProfile");
     }
-  };
+
+  } catch (error) {
+    if (error.response) {
+      setMessage(error.response.data.message);
+    } else {
+      setMessage("Server error. Try again.");
+    }
+  }
+};
 
   return (
     <div>

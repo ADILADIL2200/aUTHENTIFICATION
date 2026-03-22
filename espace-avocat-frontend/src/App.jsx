@@ -5,6 +5,9 @@ import VerifyEmail from './comps/Verify';
 import CompleteSignup from './comps/CompleteSignup';
 import Continue from './comps/Continue';
 import Login from './comps/Login';
+import ForgotPassword from './comps/ForgotPassword';
+import ResetPassword from './comps/ResetPassword';
+import AvocatProfile from './comps/Avocatprofile';
 
 export default function App() {
   return (
@@ -19,6 +22,13 @@ export default function App() {
           path="/avocatcomplete-signup"
           element={<CompleteSignup />}
         />
+          <Route
+          path="/ForgotPassword"
+          element={<ForgotPassword />}
+        
+        />
+        <Route path='/AvocatProfile' element={<AvocatProfile />} />
+        <Route path='/ResetPassword' element={<ResetPassword/>} />
       </Routes>
 
   );
